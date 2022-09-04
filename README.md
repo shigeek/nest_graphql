@@ -1,4 +1,4 @@
-## status
+## stack
 NestJS x graphQL x prisma
 
 <p align="center">
