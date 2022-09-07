@@ -1,6 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
-
 @ObjectType()
 export class Task {
   constructor(id: number, name: string) {
