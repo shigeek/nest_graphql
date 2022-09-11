@@ -5,14 +5,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator nestgraphql {
   provider = "node node_modules/prisma-nestjs-graphql"
   output   = "../src/@generated/prisma-nestjs-graphql"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Tasks {
