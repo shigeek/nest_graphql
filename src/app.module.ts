@@ -1,3 +1,4 @@
+import { PrismaService } from './prisma/prisma.service';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -16,6 +17,6 @@ import { join } from 'path';
     }),
     TasksModule,
   ],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}
