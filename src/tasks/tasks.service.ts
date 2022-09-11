@@ -8,11 +8,7 @@ export class TasksService {
   constructor(private prisma: PrismaService) {}
 
   async findAll() {
-    // const tasks = await this.prisma.task.findMany();
-    const tasks = this.tasks;
-    console.log('==aaaaaaa==================================');
-    console.log(tasks);
-    console.log('====================================');
+    const tasks = await this.prisma.task.findMany();
     return tasks;
   }
 
