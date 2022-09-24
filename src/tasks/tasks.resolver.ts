@@ -12,8 +12,8 @@ export class TasksResolver {
   }
 
   @Mutation(() => Task)
-  createTask(@Args('name') name: string) {
-    return this.tasksService.create(name);
+  createTask(@Args('name') name: string, @Args('detail') detail: string) {
+    return this.tasksService.create(name, detail);
   }
 
   @Mutation(() => Task)
@@ -22,7 +22,11 @@ export class TasksResolver {
   }
 
   @Mutation(() => Task)
-  updateTask(@Args('id') id: number, @Args('name') name: string) {
-    return this.tasksService.update(id, name);
+  updateTask(
+    @Args('id') id: number,
+    @Args('name') name: string,
+    @Args('detail') detail: string,
+  ) {
+    return this.tasksService.update(id, name, detail);
   }
 }

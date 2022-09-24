@@ -12,10 +12,11 @@ export class TasksService {
     return tasks;
   }
 
-  async create(name: string) {
+  async create(name: string, detail: string) {
     const task = await this.prisma.task.create({
       data: {
         name: name,
+        detail: detail,
       },
     });
     return task;
@@ -30,13 +31,14 @@ export class TasksService {
     return task;
   }
 
-  async update(id: number, name: string) {
+  async update(id: number, name: string, detail: string) {
     const task = await this.prisma.task.update({
       where: {
         id,
       },
       data: {
         name: name,
+        detail: detail,
       },
     });
     return task;
