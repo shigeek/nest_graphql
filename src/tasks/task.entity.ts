@@ -2,7 +2,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Task {
-  constructor(id: number, name: string, detail: string) {
+  constructor(id?: number, name?: string, detail?: string) {
     this.id = id;
     this.name = name;
     this.detail = detail;
@@ -20,6 +20,10 @@ export class Task {
   @Field({})
   get nameDetail(): string {
     return `${this.name} ${this.detail}`;
+  }
+  @Field({})
+  get detailName(): string {
+    return `${this.detail} ${this.name}`;
   }
 
   updateName(newName: string) {

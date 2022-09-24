@@ -1,46 +1,38 @@
-import { PrismaService } from '../prisma/prisma.service';
+import { TaskRepository } from './task.repository';
 import { Injectable } from '@nestjs/common';
 import { Task } from './task.entity';
 
 @Injectable()
 export class TasksService {
   private tasks: Task[] = [];
-  constructor(private prisma: PrismaService) {}
+  constructor(private taskRepository: TaskRepository) {}
 
   async findAll() {
-    const tasks = await this.prisma.task.findMany();
+    const tasks = await this.taskRepository.findAll();
     return tasks;
   }
 
-  async create(name: string, detail: string) {
-    const task = await this.prisma.task.create({
-      data: {
-        name: name,
-        detail: detail,
-      },
-    });
+  async findById(id: number) {
+    const task = await this.taskRepository.findById(id);
     return task;
   }
 
-  async delete(id: number) {
-    const task = await this.prisma.task.delete({
-      where: {
-        id,
-      },
-    });
+  async create(name: string, detail: string) {
+    const newTask = new Task(null, name, detail);
+    const task = await this.taskRepository.create(newTask);
     return task;
+  }
+
+  async delete(id: number): Promise<void> {
+    const deleteTask = await this.taskRepository.findById(id);
+    await this.taskRepository.delete(deleteTask);
   }
 
   async update(id: number, name: string, detail: string) {
-    const task = await this.prisma.task.update({
-      where: {
-        id,
-      },
-      data: {
-        name: name,
-        detail: detail,
-      },
-    });
+    const updateTask = await this.taskRepository.findById(id);
+    updateTask.name = name;
+    updateTask.detail = detail;
+    const task = await this.taskRepository.update(updateTask);
     return task;
   }
 }
