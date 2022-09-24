@@ -18,6 +18,9 @@ export class Task {
   detail: string;
 
   @Field({})
+  status: string;
+
+  @Field({})
   get nameDetail(): string {
     return `${this.name} ${this.detail}`;
   }
@@ -26,7 +29,12 @@ export class Task {
     return `${this.detail} ${this.name}`;
   }
 
-  updateName(newName: string) {
+  update(newName: string, newDetail: string) {
     this.name = newName;
+    this.detail = newDetail;
+  }
+
+  start() {
+    this.status = 'InProgress';
   }
 }

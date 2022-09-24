@@ -29,10 +29,16 @@ export class TasksService {
   }
 
   async update(id: number, name: string, detail: string) {
-    const updateTask = await this.taskRepository.findById(id);
-    updateTask.name = name;
-    updateTask.detail = detail;
-    const task = await this.taskRepository.update(updateTask);
+    const targetTask = await this.taskRepository.findById(id);
+    targetTask.update(name, detail);
+    const task = await this.taskRepository.update(targetTask);
+    return task;
+  }
+
+  async startTask(id: number) {
+    const targetTask = await this.taskRepository.findById(id);
+    targetTask.start();
+    const task = await this.taskRepository.update(targetTask);
     return task;
   }
 }
